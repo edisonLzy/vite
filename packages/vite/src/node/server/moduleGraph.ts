@@ -66,6 +66,7 @@ export type ResolvedUrl = [
 
 export class ModuleGraph {
   urlToModuleMap = new Map<string, ModuleNode>()
+  // id为经过 plugin.resolveId 处理的url
   idToModuleMap = new Map<string, ModuleNode>()
   // a single file may corresponds to multiple modules with different queries
   fileToModulesMap = new Map<string, Set<ModuleNode>>()

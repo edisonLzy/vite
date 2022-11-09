@@ -33,7 +33,8 @@
     "dev": "pnpm -r --parallel --filter='./packages/*' run dev",
     "release": "tsx scripts/release.ts",
     "ci-publish": "tsx scripts/publishCI.ts",
-    "ci-docs": "run-s build docs-build"
+    "ci-docs": "run-s build docs-build",
+    "start": "pnpm -F='vite' run dev "
   },
   "devDependencies": {
     "@babel/types": "^7.20.2",

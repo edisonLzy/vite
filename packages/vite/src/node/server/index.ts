@@ -336,6 +336,7 @@ export async function createServer(
     resolvedWatchOptions
   ) as FSWatcher
 
+  // HRM: 初始化 moduleGraph 实例
   const moduleGraph: ModuleGraph = new ModuleGraph((url, ssr) =>
     container.resolveId(url, undefined, { ssr })
   )
