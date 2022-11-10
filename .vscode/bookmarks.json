@@ -1,11 +1,11 @@
 {
   "files": [
     {
-      "path": "packages/vite/src/node/server/moduleGraph.ts",
+      "path": "packages/vite/src/node/server/transformRequest.ts",
       "bookmarks": [
         {
-          "line": 35,
-          "column": 14,
+          "line": 230,
+          "column": 18,
           "label": ""
         }
       ]

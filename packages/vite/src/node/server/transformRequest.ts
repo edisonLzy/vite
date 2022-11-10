@@ -123,7 +123,7 @@ async function doTransform(
   const prettyUrl = isDebug ? prettifyUrl(url, config.root) : ''
   const ssr = !!options.ssr
 
-  // 创建 moduleNode
+  // 检查是否有 url对应的 moduleNode
   const module = await server.moduleGraph.getModuleByUrl(url, ssr)
 
   // check if we have a fresh cache
@@ -229,6 +229,7 @@ async function loadAndTransform(
   }
 
   // ensure module in moduleGraph after successful load
+  // 创建moduleNode
   const mod = await moduleGraph.ensureEntryFromUrl(url, ssr)
   ensureWatchedFile(watcher, mod.file, root)
 
