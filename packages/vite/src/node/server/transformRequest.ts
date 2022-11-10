@@ -123,6 +123,7 @@ async function doTransform(
   const prettyUrl = isDebug ? prettifyUrl(url, config.root) : ''
   const ssr = !!options.ssr
 
+  // 创建 moduleNode
   const module = await server.moduleGraph.getModuleByUrl(url, ssr)
 
   // check if we have a fresh cache
@@ -139,7 +140,7 @@ async function doTransform(
     return cached
   }
 
-  // resolve
+  // 调用各个插件的resolveId方法得到id
   const id =
     (await pluginContainer.resolveId(url, undefined, { ssr }))?.id || url
 
@@ -227,7 +228,7 @@ async function loadAndTransform(
     }
   }
 
-  // ensure module in graph after successful load
+  // ensure module in moduleGraph after successful load
   const mod = await moduleGraph.ensureEntryFromUrl(url, ssr)
   ensureWatchedFile(watcher, mod.file, root)
 

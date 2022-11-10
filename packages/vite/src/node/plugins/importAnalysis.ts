@@ -171,6 +171,7 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
       server = _server
     },
 
+    // 使用 es-module-lexer , 对模块代码中的 import 语句进行分析
     async transform(source, importer, options) {
       // In a real app `server` is always defined, but it is undefined when
       // running src/node/server/__tests__/pluginContainer.spec.ts
@@ -244,8 +245,10 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
       let needQueryInjectHelper = false
       let s: MagicString | undefined
       const str = () => s || (s = new MagicString(source))
+      // 当前模块的依赖模块 url 集合
       const importedUrls = new Set<string>()
       const staticImportedUrls = new Set<{ url: string; id: string }>()
+      // 当前模块中通过 import.meta.hot.accept 声明的依赖模块 url 集合
       const acceptedUrls = new Set<{
         url: string
         start: number
@@ -687,6 +690,8 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
         ) {
           isSelfAccepting = true
         }
+        // TODO 模块依赖关系绑定
+        // 到这里已经分析处理当前模块是否自更新
         const prunedImports = await moduleGraph.updateModuleInfo(
           importerModule,
           importedUrls,

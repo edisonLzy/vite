@@ -338,6 +338,7 @@ export async function createServer(
 
   // HRM: 初始化 moduleGraph 实例
   const moduleGraph: ModuleGraph = new ModuleGraph((url, ssr) =>
+    // 这个方法将在创建ensureEntryFromUrl中调用
     container.resolveId(url, undefined, { ssr })
   )
 

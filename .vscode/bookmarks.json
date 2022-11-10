@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "path": "packages/vite/src/node/server/moduleGraph.ts",
+      "bookmarks": [
+        {
+          "line": 35,
+          "column": 14,
+          "label": ""
+        }
+      ]
+    }
+  ]
+}

@@ -19,16 +19,23 @@ export class ModuleNode {
    * Resolved file system path + query
    */
   id: string | null = null
+  // file system path
   file: string | null = null
   type: 'js' | 'css'
   info?: ModuleInfo
+  // resolveId 钩子返回结果中的元数据
   meta?: Record<string, any>
+  // 该模块的引用方 index.html
   importers = new Set<ModuleNode>()
+  // 该模块所依赖的模块 render.ts state.ts
   importedModules = new Set<ModuleNode>()
+  // 接受更新的模块 ?
   acceptedHmrDeps = new Set<ModuleNode>()
   acceptedHmrExports: Set<string> | null = null
   importedBindings: Map<string, Set<string>> | null = null
+  // 是否接受自身更新(更新边界为自己的情况)
   isSelfAccepting?: boolean
+  // 经过 transform 钩子后的编译结果
   transformResult: TransformResult | null = null
   ssrTransformResult: TransformResult | null = null
   ssrModule: Record<string, any> | null = null
@@ -148,10 +155,12 @@ export class ModuleGraph {
     let noLongerImported: Set<ModuleNode> | undefined
     // update import graph
     for (const imported of importedModules) {
+      // 创建依赖模块的moduleNode
       const dep =
         typeof imported === 'string'
           ? await this.ensureEntryFromUrl(imported, ssr)
           : imported
+      // 将当前模块放到子模块的moduleNode
       dep.importers.add(mod)
       nextImports.add(dep)
     }
@@ -185,10 +194,14 @@ export class ModuleGraph {
     ssr?: boolean,
     setIsSelfAccepting = true
   ): Promise<ModuleNode> {
+    // resolveUrl 最终会通过pluginContainer调用各个插件的resolveId钩子
     const [url, resolvedId, meta] = await this.resolveUrl(rawUrl, ssr)
     let mod = this.idToModuleMap.get(resolvedId)
     if (!mod) {
+      // 🚀 至此moduleNode已创建完毕,  创建当前url对象的moduleNode
       mod = new ModuleNode(url, setIsSelfAccepting)
+      //
+      // 初始化mod信息: 并记录到 urlToModuleMap、idToModuleMap、fileToModulesMap 这三张表中
       if (meta) mod.meta = meta
       this.urlToModuleMap.set(url, mod)
       mod.id = resolvedId
