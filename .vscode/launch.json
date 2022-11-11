@@ -9,8 +9,11 @@
       "name": "Run pnpm start",
       "request": "launch",
       "type": "node-terminal",
-      "skipFiles": ["<node_internals>/**"],
-      "resolveSourceMapLocations": ["${workspaceFolder}/**"]
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**",
+        "${workspaceFolder}/node_modules/vite/**"
+      ]
     }
   ]
 }

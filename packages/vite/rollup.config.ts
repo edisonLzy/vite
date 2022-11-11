@@ -141,11 +141,12 @@ function createNodeConfig(isProduction: boolean) {
     },
     output: {
       ...sharedNodeOptions.output,
-      sourcemap: !isProduction
+      sourcemap: true
     },
     external: [
       'fsevents',
       ...Object.keys(pkg.dependencies),
+      // AWS
       ...(isProduction ? [] : Object.keys(pkg.devDependencies))
     ],
     plugins: createNodePlugins(
