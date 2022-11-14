@@ -5,15 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "pnpm -F='for-hrm' run dev",
+      "command": "pnpm start",
       "name": "Run pnpm start",
       "request": "launch",
-      "type": "node-terminal",
-      "resolveSourceMapLocations": [
-        "${workspaceFolder}/**",
-        "!**/node_modules/**",
-        "${workspaceFolder}/node_modules/vite/**"
-      ]
+      "type": "node-terminal"
     }
   ]
 }

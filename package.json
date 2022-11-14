@@ -34,7 +34,7 @@
     "release": "tsx scripts/release.ts",
     "ci-publish": "tsx scripts/publishCI.ts",
     "ci-docs": "run-s build docs-build",
-    "start": "pnpm -F='vite' run dev"
+    "start": "tsx start.mts"
   },
   "devDependencies": {
     "@babel/types": "^7.20.2",
