@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "include": [".", "../start.mts"],
+  "include": ["."],
   "compilerOptions": {
     "module": "CommonJS",
     "target": "ES2020",

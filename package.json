@@ -34,7 +34,8 @@
     "release": "tsx scripts/release.ts",
     "ci-publish": "tsx scripts/publishCI.ts",
     "ci-docs": "run-s build docs-build",
-    "start": "tsx start.mts"
+    "start": "tsx start.mts",
+    "start:watch": "tsx watch start.mts"
   },
   "devDependencies": {
     "@babel/types": "^7.20.2",
