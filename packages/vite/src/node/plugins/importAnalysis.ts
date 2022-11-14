@@ -171,7 +171,8 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
       server = _server
     },
 
-    // 使用 es-module-lexer , 对模块代码中的 import 语句进行分析
+    // 使用 es-module-lexer , 对模块代码中的 import 语句进行分析,找出依赖模块
+    // 当处理entry模块的时候，importer就是entry
     async transform(source, importer, options) {
       // In a real app `server` is always defined, but it is undefined when
       // running src/node/server/__tests__/pluginContainer.spec.ts
@@ -221,6 +222,7 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
       const { moduleGraph } = server
       // since we are already in the transform phase of the importer, it must
       // have been loaded so its entry is guaranteed in the module graph.
+      // hrm: 对于入口模块来说,importer就是模块自己
       const importerModule = moduleGraph.getModuleById(importer)!
       if (!importerModule && depsOptimizer?.isOptimizedDepFile(importer)) {
         // Ids of optimized deps could be invalidated and removed from the graph
@@ -245,10 +247,10 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
       let needQueryInjectHelper = false
       let s: MagicString | undefined
       const str = () => s || (s = new MagicString(source))
-      // 当前模块的依赖模块 url 集合
+      // hrm: 当前模块的依赖模块 url 集合
       const importedUrls = new Set<string>()
       const staticImportedUrls = new Set<{ url: string; id: string }>()
-      // 当前模块中通过 import.meta.hot.accept 声明的依赖模块 url 集合
+      // hrm: 当前模块中通过 import.meta.hot.accept 声明的依赖模块 url 集合
       const acceptedUrls = new Set<{
         url: string
         start: number
@@ -691,9 +693,11 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
           isSelfAccepting = true
         }
         // TODO 模块依赖关系绑定
-        // 到这里已经分析处理当前模块是否自更新
+        // hrm: 到这里已经分析处理当前模块是否自更新
         const prunedImports = await moduleGraph.updateModuleInfo(
+          // 当前模块将作为importer
           importerModule,
+          // 当前模块导入的模块
           importedUrls,
           importedBindings,
           normalizedAcceptedUrls,

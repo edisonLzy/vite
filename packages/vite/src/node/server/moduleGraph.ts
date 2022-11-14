@@ -72,6 +72,7 @@ export type ResolvedUrl = [
 ]
 
 export class ModuleGraph {
+  // 由原始请求 url 到模块节点的映射，如 /src/index.tsx
   urlToModuleMap = new Map<string, ModuleNode>()
   // id为经过 plugin.resolveId 处理的url
   idToModuleMap = new Map<string, ModuleNode>()
@@ -160,8 +161,9 @@ export class ModuleGraph {
         typeof imported === 'string'
           ? await this.ensureEntryFromUrl(imported, ssr)
           : imported
-      // 将当前模块放到子模块的moduleNode
+      // hrm : 将父模块放到子模块的importers属性上
       dep.importers.add(mod)
+      // hrm: 将子模块添加到父模块的importedModules属性上
       nextImports.add(dep)
     }
     // remove the importer from deps that were imported but no longer are.
@@ -198,7 +200,7 @@ export class ModuleGraph {
     const [url, resolvedId, meta] = await this.resolveUrl(rawUrl, ssr)
     let mod = this.idToModuleMap.get(resolvedId)
     if (!mod) {
-      // 🚀 至此moduleNode已创建完毕,  创建当前url对象的moduleNode
+      // hrm: 🚀 至此moduleNode已创建完毕,  创建当前url对象的moduleNode
       mod = new ModuleNode(url, setIsSelfAccepting)
       //
       // 初始化mod信息: 并记录到 urlToModuleMap、idToModuleMap、fileToModulesMap 这三张表中

@@ -123,7 +123,7 @@ async function doTransform(
   const prettyUrl = isDebug ? prettifyUrl(url, config.root) : ''
   const ssr = !!options.ssr
 
-  // 检查是否有 url对应的 moduleNode
+  // hrm: 检查是否有 url对应的 moduleNode
   const module = await server.moduleGraph.getModuleByUrl(url, ssr)
 
   // check if we have a fresh cache
@@ -140,10 +140,10 @@ async function doTransform(
     return cached
   }
 
-  // 调用各个插件的resolveId方法得到id
+  // hrm: 调用各个插件的resolveId方法得到id
   const id =
     (await pluginContainer.resolveId(url, undefined, { ssr }))?.id || url
-
+  // hrm: 调用 load和transform处理模块以及创建moduleNode
   const result = loadAndTransform(id, url, server, options, timestamp)
 
   getDepsOptimizer(config, ssr)?.delayDepsOptimizerUntil(id, () => result)
@@ -184,6 +184,7 @@ async function loadAndTransform(
     // like /service-worker.js or /api/users
     if (options.ssr || isFileServingAllowed(file, server)) {
       try {
+        // 读取到文本内容
         code = await fs.readFile(file, 'utf-8')
         isDebug && debugLoad(`${timeFrom(loadStart)} [fs] ${prettyUrl}`)
       } catch (e) {
@@ -235,6 +236,7 @@ async function loadAndTransform(
 
   // transform
   const transformStart = isDebug ? performance.now() : 0
+  // hrm: 调用插件的transform方法,其中在importAnalysis插件的transform钩子中，将完成模块依赖关系绑定
   const transformResult = await pluginContainer.transform(code, id, {
     inMap: map,
     ssr

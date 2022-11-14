@@ -316,6 +316,7 @@ export async function createServer(
   const httpsOptions = await resolveHttpsConfig(config.server.https)
   const { middlewareMode } = serverConfig
 
+  // Api: server.watch 将传递给 chokidar
   const resolvedWatchOptions = resolveChokidarOptions({
     disableGlobbing: true,
     ...serverConfig.watch
@@ -483,10 +484,12 @@ export async function createServer(
   }
 
   watcher.on('change', async (file) => {
+    // hrm: 这里的file是变化文件的绝对路径
     file = normalizePath(file)
     if (file.endsWith('/package.json')) {
       return invalidatePackageData(packageCache, file)
     }
+    // hrm: 让当前模块的缓存信息失效server
     // invalidate module graph cache on file change
     moduleGraph.onFileChange(file)
     if (serverConfig.hmr !== false) {
