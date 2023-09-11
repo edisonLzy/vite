@@ -1,0 +1,34 @@
+{
+  "files": [
+    {
+      "path": "packages/vite/src/node/server/transformRequest.ts",
+      "bookmarks": [
+        {
+          "line": 125,
+          "column": 10,
+          "label": ""
+        },
+        {
+          "line": 231,
+          "column": 18,
+          "label": ""
+        }
+      ]
+    },
+    {
+      "path": "packages/vite/src/node/server/index.ts",
+      "bookmarks": [
+        {
+          "line": 318,
+          "column": 10,
+          "label": ""
+        },
+        {
+          "line": 339,
+          "column": 4,
+          "label": ""
+        }
+      ]
+    }
+  ]
+}

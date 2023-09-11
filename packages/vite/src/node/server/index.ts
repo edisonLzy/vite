@@ -345,6 +345,7 @@ export async function _createServer(
   const httpsOptions = await resolveHttpsConfig(config.server.https)
   const { middlewareMode } = serverConfig
 
+  // Api: server.watch 将传递给 chokidar
   const resolvedWatchOptions = resolveChokidarOptions(config, {
     disableGlobbing: true,
     ...serverConfig.watch,
@@ -366,7 +367,9 @@ export async function _createServer(
     resolvedWatchOptions,
   ) as FSWatcher
 
+  // HRM: 初始化 moduleGraph 实例
   const moduleGraph: ModuleGraph = new ModuleGraph((url, ssr) =>
+    // 这个方法将在创建ensureEntryFromUrl中调用
     container.resolveId(url, undefined, { ssr }),
   )
 
@@ -553,6 +556,7 @@ export async function _createServer(
   }
 
   watcher.on('change', async (file) => {
+    // hrm: 这里的file是变化文件的绝对路径
     file = normalizePath(file)
     // invalidate module graph cache on file change
     moduleGraph.onFileChange(file)

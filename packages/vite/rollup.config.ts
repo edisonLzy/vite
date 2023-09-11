@@ -156,12 +156,13 @@ function createNodeConfig(isProduction: boolean) {
     },
     output: {
       ...sharedNodeOptions.output,
-      sourcemap: !isProduction,
+      sourcemap: true,
     },
     external: [
       'fsevents',
       'lightningcss',
       ...Object.keys(pkg.dependencies),
+      // AWS
       ...(isProduction ? [] : Object.keys(pkg.devDependencies)),
     ],
     plugins: createNodePlugins(

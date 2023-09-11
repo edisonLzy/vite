@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: false
-  excludeLinksFromLockfile: false
-
 overrides:
   vite: workspace:*
 
@@ -232,7 +228,7 @@ importers:
     optionalDependencies:
       fsevents:
         specifier: ~2.3.2
-        version: 2.3.3
+        version: 2.3.2
     devDependencies:
       '@ampproject/remapping':
         specifier: ^2.2.1
@@ -655,6 +651,8 @@ importers:
       vue:
         specifier: ^3.3.4
         version: 3.3.4
+
+  playground/for-hrm: {}
 
   playground/fs-serve: {}
 
@@ -4935,7 +4933,7 @@ packages:
       normalize-path: 3.0.0
       readdirp: 3.6.0
     optionalDependencies:
-      fsevents: 2.3.3
+      fsevents: 2.3.2
     patched: true
 
   /chownr@1.1.4:
@@ -6524,8 +6522,8 @@ packages:
   /fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
 
-  /fsevents@2.3.3:
-    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
+  /fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
@@ -6828,7 +6826,7 @@ packages:
       source-map: 0.6.1
       wordwrap: 1.0.0
     optionalDependencies:
-      uglify-js: 3.17.4
+      uglify-js: 3.16.1
     dev: true
 
   /hard-rejection@2.1.0:
@@ -7386,7 +7384,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
     dev: true
 
   /jsonify@0.0.1:
@@ -7505,6 +7503,7 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -7514,6 +7513,7 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -7523,6 +7523,7 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -7532,6 +7533,7 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -7961,7 +7963,7 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  /mkdist@1.2.0(typescript@5.0.4):
+  /mkdist@1.2.0(typescript@5.2.2):
     resolution: {integrity: sha512-UTqu/bXmIk/+VKNVgufAeMyjUcNy1dn9Bl7wL1zZlCKVrpDgj/VllmZBeh3ZCC/2HWqUrt6frNFTKt9TRZbNvQ==}
     hasBin: true
     peerDependencies:
@@ -7981,7 +7983,7 @@ packages:
       mlly: 1.4.0
       mri: 1.2.0
       pathe: 1.1.1
-      typescript: 5.0.4
+      typescript: 5.2.2
     dev: true
 
   /mlly@1.4.0:
@@ -9213,7 +9215,7 @@ packages:
       glob: 10.2.7
     dev: true
 
-  /rollup-plugin-dts@5.3.0(rollup@3.28.0)(typescript@5.0.4):
+  /rollup-plugin-dts@5.3.0(rollup@3.28.0)(typescript@5.2.2):
     resolution: {integrity: sha512-8FXp0ZkyZj1iU5klkIJYLjIq/YZSwBoERu33QBDxm/1yw5UU4txrEtcmMkrq+ZiKu3Q4qvPCNqc3ovX6rjqzbQ==}
     engines: {node: '>=v14'}
     peerDependencies:
@@ -9222,7 +9224,7 @@ packages:
     dependencies:
       magic-string: 0.30.2
       rollup: 3.28.0
-      typescript: 5.0.4
+      typescript: 5.2.2
     optionalDependencies:
       '@babel/code-frame': 7.22.13
     dev: true
@@ -9250,7 +9252,7 @@ packages:
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
-      fsevents: 2.3.3
+      fsevents: 2.3.2
 
   /run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
@@ -10054,7 +10056,7 @@ packages:
       '@esbuild-kit/core-utils': 3.0.0
       '@esbuild-kit/esm-loader': 2.5.5
     optionalDependencies:
-      fsevents: 2.3.3
+      fsevents: 2.3.2
     dev: true
 
   /tunnel-agent@0.6.0:
@@ -10164,12 +10166,18 @@ packages:
     hasBin: true
     dev: true
 
+  /typescript@5.2.2:
+    resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    dev: true
+
   /ufo@1.2.0:
     resolution: {integrity: sha512-RsPyTbqORDNDxqAdQPQBpgqhWle1VcTSou/FraClYlHf6TZnQcGslpLcAphNR+sQW4q5lLWLbOsRlh9j24baQg==}
     dev: true
 
-  /uglify-js@3.17.4:
-    resolution: {integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==}
+  /uglify-js@3.16.1:
+    resolution: {integrity: sha512-X5BGTIDH8U6IQ1TIRP62YC36k+ULAa1d59BxlWvPUJ1NkW5L3FwcGfEzuVvGmhJFBu0YJ5Ge25tmRISqCmLiRQ==}
     engines: {node: '>=0.8.0'}
     hasBin: true
     requiresBuild: true
@@ -10203,16 +10211,16 @@ packages:
       hookable: 5.5.3
       jiti: 1.18.2
       magic-string: 0.30.2
-      mkdist: 1.2.0(typescript@5.0.4)
+      mkdist: 1.2.0(typescript@5.2.2)
       mlly: 1.4.0
       mri: 1.2.0
       pathe: 1.1.0
       pkg-types: 1.0.2
       pretty-bytes: 6.1.0
       rollup: 3.28.0
-      rollup-plugin-dts: 5.3.0(rollup@3.28.0)(typescript@5.0.4)
+      rollup-plugin-dts: 5.3.0(rollup@3.28.0)(typescript@5.2.2)
       scule: 1.0.0
-      typescript: 5.0.4
+      typescript: 5.2.2
       untyped: 1.3.2
     transitivePeerDependencies:
       - sass
@@ -10722,16 +10730,19 @@ packages:
   file:playground/alias/dir/module:
     resolution: {directory: playground/alias/dir/module, type: directory}
     name: '@vitejs/test-aliased-module'
+    version: 0.0.0
     dev: false
 
   file:playground/css/css-js-dep:
     resolution: {directory: playground/css/css-js-dep, type: directory}
     name: '@vitejs/test-css-js-dep'
+    version: 1.0.0
     dev: true
 
   file:playground/css/css-proxy-dep:
     resolution: {directory: playground/css/css-proxy-dep, type: directory}
     name: '@vitejs/test-css-proxy-dep'
+    version: 1.0.0
     dependencies:
       '@vitejs/test-css-proxy-dep-nested': file:playground/css/css-proxy-dep-nested
     dev: true
@@ -10739,20 +10750,24 @@ packages:
   file:playground/css/css-proxy-dep-nested:
     resolution: {directory: playground/css/css-proxy-dep-nested, type: directory}
     name: '@vitejs/test-css-proxy-dep-nested'
+    version: 1.0.0
 
   file:playground/define/commonjs-dep:
     resolution: {directory: playground/define/commonjs-dep, type: directory}
     name: '@vitejs/test-commonjs-dep'
+    version: 1.0.0
     dev: false
 
   file:playground/dynamic-import/pkg:
     resolution: {directory: playground/dynamic-import/pkg, type: directory}
     name: '@vitejs/test-pkg'
+    version: 1.0.0
     dev: false
 
   file:playground/external/dep-that-imports:
     resolution: {directory: playground/external/dep-that-imports, type: directory}
     name: '@vitejs/test-dep-that-imports'
+    version: 0.0.0
     dependencies:
       slash3: /slash@3.0.0
       slash5: /slash@5.1.0
@@ -10762,6 +10777,7 @@ packages:
   file:playground/external/dep-that-requires:
     resolution: {directory: playground/external/dep-that-requires, type: directory}
     name: '@vitejs/test-dep-that-requires'
+    version: 0.0.0
     dependencies:
       slash3: /slash@3.0.0
       slash5: /slash@5.1.0
@@ -10776,36 +10792,43 @@ packages:
   file:playground/import-assertion/import-assertion-dep:
     resolution: {directory: playground/import-assertion/import-assertion-dep, type: directory}
     name: '@vitejs/test-import-assertion-dep'
+    version: 0.0.0
     dev: false
 
   file:playground/js-sourcemap/importee-pkg:
     resolution: {directory: playground/js-sourcemap/importee-pkg, type: directory}
     name: '@vitejs/test-importee-pkg'
+    version: 0.0.0
     dev: false
 
   file:playground/json/json-module:
     resolution: {directory: playground/json/json-module, type: directory}
     name: '@vitejs/test-json-module'
+    version: 0.0.0
     dev: true
 
   file:playground/minify/dir/module:
     resolution: {directory: playground/minify/dir/module, type: directory}
     name: '@vitejs/test-minify'
+    version: 0.0.0
     dev: false
 
   file:playground/optimize-deps-no-discovery/dep-no-discovery:
     resolution: {directory: playground/optimize-deps-no-discovery/dep-no-discovery, type: directory}
     name: '@vitejs/test-dep-no-discovery'
+    version: 1.0.0
     dev: false
 
   file:playground/optimize-deps/added-in-entries:
     resolution: {directory: playground/optimize-deps/added-in-entries, type: directory}
     name: '@vitejs/test-added-in-entries'
+    version: 1.0.0
     dev: false
 
   file:playground/optimize-deps/dep-alias-using-absolute-path:
     resolution: {directory: playground/optimize-deps/dep-alias-using-absolute-path, type: directory}
     name: '@vitejs/test-dep-alias-using-absolute-path'
+    version: 1.0.0
     dependencies:
       lodash: 4.17.21
     dev: false
@@ -10813,81 +10836,97 @@ packages:
   file:playground/optimize-deps/dep-cjs-browser-field-bare:
     resolution: {directory: playground/optimize-deps/dep-cjs-browser-field-bare, type: directory}
     name: '@vitejs/test-dep-cjs-browser-field-bare'
+    version: 0.0.0
     dev: false
 
   file:playground/optimize-deps/dep-cjs-compiled-from-cjs:
     resolution: {directory: playground/optimize-deps/dep-cjs-compiled-from-cjs, type: directory}
     name: '@vitejs/test-dep-cjs-compiled-from-cjs'
+    version: 0.0.0
     dev: false
 
   file:playground/optimize-deps/dep-cjs-compiled-from-esm:
     resolution: {directory: playground/optimize-deps/dep-cjs-compiled-from-esm, type: directory}
     name: '@vitejs/test-dep-cjs-compiled-from-esm'
+    version: 0.0.0
     dev: false
 
   file:playground/optimize-deps/dep-cjs-with-assets:
     resolution: {directory: playground/optimize-deps/dep-cjs-with-assets, type: directory}
     name: '@vitejs/test-dep-cjs-with-assets'
+    version: 0.0.0
     dev: false
 
   file:playground/optimize-deps/dep-css-require:
     resolution: {directory: playground/optimize-deps/dep-css-require, type: directory}
     name: '@vitejs/test-dep-css-require'
+    version: 0.0.0
     dev: false
 
   file:playground/optimize-deps/dep-esbuild-plugin-transform:
     resolution: {directory: playground/optimize-deps/dep-esbuild-plugin-transform, type: directory}
     name: '@vitejs/test-dep-esbuild-plugin-transform'
+    version: 0.0.0
     dev: false
 
   file:playground/optimize-deps/dep-node-env:
     resolution: {directory: playground/optimize-deps/dep-node-env, type: directory}
     name: '@vitejs/test-dep-node-env'
+    version: 1.0.0
     dev: false
 
   file:playground/optimize-deps/dep-non-optimized:
     resolution: {directory: playground/optimize-deps/dep-non-optimized, type: directory}
     name: '@vitejs/test-dep-non-optimized'
+    version: 1.0.0
     dev: false
 
   file:playground/optimize-deps/dep-not-js:
     resolution: {directory: playground/optimize-deps/dep-not-js, type: directory}
     name: '@vitejs/test-dep-not-js'
+    version: 1.0.0
     dev: false
 
   file:playground/optimize-deps/dep-optimize-exports-with-glob:
     resolution: {directory: playground/optimize-deps/dep-optimize-exports-with-glob, type: directory}
     name: '@vitejs/test-dep-optimize-exports-with-glob'
+    version: 1.0.0
     dev: false
 
   file:playground/optimize-deps/dep-optimize-with-glob:
     resolution: {directory: playground/optimize-deps/dep-optimize-with-glob, type: directory}
     name: '@vitejs/test-dep-optimize-with-glob'
+    version: 1.0.0
     dev: false
 
   file:playground/optimize-deps/dep-relative-to-main:
     resolution: {directory: playground/optimize-deps/dep-relative-to-main, type: directory}
     name: '@vitejs/test-dep-relative-to-main'
+    version: 1.0.0
     dev: false
 
   file:playground/optimize-deps/dep-with-builtin-module-cjs:
     resolution: {directory: playground/optimize-deps/dep-with-builtin-module-cjs, type: directory}
     name: '@vitejs/test-dep-with-builtin-module-cjs'
+    version: 0.0.0
     dev: false
 
   file:playground/optimize-deps/dep-with-builtin-module-esm:
     resolution: {directory: playground/optimize-deps/dep-with-builtin-module-esm, type: directory}
     name: '@vitejs/test-dep-with-builtin-module-esm'
+    version: 0.0.0
     dev: false
 
   file:playground/optimize-deps/dep-with-dynamic-import:
     resolution: {directory: playground/optimize-deps/dep-with-dynamic-import, type: directory}
     name: '@vitejs/test-dep-with-dynamic-import'
+    version: 0.0.0
     dev: false
 
   file:playground/optimize-deps/dep-with-optional-peer-dep:
     resolution: {directory: playground/optimize-deps/dep-with-optional-peer-dep, type: directory}
     name: '@vitejs/test-dep-with-optional-peer-dep'
+    version: 0.0.0
     peerDependencies:
       foobar: 0.0.0
     peerDependenciesMeta:
@@ -10898,6 +10937,7 @@ packages:
   file:playground/optimize-deps/nested-exclude:
     resolution: {directory: playground/optimize-deps/nested-exclude, type: directory}
     name: '@vitejs/test-nested-exclude'
+    version: 1.0.0
     dependencies:
       '@vitejs/test-nested-include': file:playground/optimize-deps/nested-include
       nested-include: file:playground/optimize-deps/nested-include
@@ -10906,11 +10946,13 @@ packages:
   file:playground/optimize-deps/nested-include:
     resolution: {directory: playground/optimize-deps/nested-include, type: directory}
     name: '@vitejs/test-nested-include'
+    version: 1.0.0
     dev: false
 
   file:playground/optimize-missing-deps/missing-dep:
     resolution: {directory: playground/optimize-missing-deps/missing-dep, type: directory}
     name: '@vitejs/test-missing-dep'
+    version: 0.0.0
     dependencies:
       '@vitejs/test-multi-entry-dep': file:playground/optimize-missing-deps/multi-entry-dep
       multi-entry-dep: file:playground/optimize-missing-deps/multi-entry-dep
@@ -10919,15 +10961,18 @@ packages:
   file:playground/optimize-missing-deps/multi-entry-dep:
     resolution: {directory: playground/optimize-missing-deps/multi-entry-dep, type: directory}
     name: '@vitejs/test-multi-entry-dep'
+    version: 0.0.0
     dev: false
 
   file:playground/preload/dep-a:
     resolution: {directory: playground/preload/dep-a, type: directory}
     name: '@vitejs/test-dep-a'
+    version: 0.0.0
 
   file:playground/preload/dep-including-a:
     resolution: {directory: playground/preload/dep-including-a, type: directory}
     name: '@vitejs/test-dep-including-a'
+    version: 0.0.0
     dependencies:
       '@vitejs/test-dep-a': file:playground/preload/dep-a
       dep-a: file:playground/preload/dep-a
@@ -10936,26 +10981,31 @@ packages:
   file:playground/ssr-deps/css-lib:
     resolution: {directory: playground/ssr-deps/css-lib, type: directory}
     name: '@vitejs/test-css-lib'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/define-properties-exports:
     resolution: {directory: playground/ssr-deps/define-properties-exports, type: directory}
     name: '@vitejs/test-define-properties-exports'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/define-property-exports:
     resolution: {directory: playground/ssr-deps/define-property-exports, type: directory}
     name: '@vitejs/test-define-property-exports'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/external-entry:
     resolution: {directory: playground/ssr-deps/external-entry, type: directory}
     name: '@vitejs/test-external-entry'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/external-using-external-entry:
     resolution: {directory: playground/ssr-deps/external-using-external-entry, type: directory}
     name: '@vitejs/test-external-using-external-entry'
+    version: 0.0.0
     dependencies:
       external-entry: file:playground/ssr-deps/external-entry
     dev: false
@@ -10963,6 +11013,7 @@ packages:
   file:playground/ssr-deps/forwarded-export:
     resolution: {directory: playground/ssr-deps/forwarded-export, type: directory}
     name: '@vitejs/test-forwarded-export'
+    version: 0.0.0
     dependencies:
       object-assigned-exports: file:playground/ssr-deps/object-assigned-exports
     dev: false
@@ -10970,46 +11021,55 @@ packages:
   file:playground/ssr-deps/import-builtin-cjs:
     resolution: {directory: playground/ssr-deps/import-builtin-cjs, type: directory}
     name: '@vitejs/test-import-builtin'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/module-condition:
     resolution: {directory: playground/ssr-deps/module-condition, type: directory}
     name: '@vitejs/test-module-condition'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/nested-external:
     resolution: {directory: playground/ssr-deps/nested-external, type: directory}
     name: '@vitejs/test-nested-external'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/nested-external-cjs:
     resolution: {directory: playground/ssr-deps/nested-external-cjs, type: directory}
     name: nested-external-cjs
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/no-external-cjs:
     resolution: {directory: playground/ssr-deps/no-external-cjs, type: directory}
     name: '@vitejs/test-no-external-cjs'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/no-external-css:
     resolution: {directory: playground/ssr-deps/no-external-css, type: directory}
     name: '@vitejs/test-no-external-css'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/object-assigned-exports:
     resolution: {directory: playground/ssr-deps/object-assigned-exports, type: directory}
     name: '@vitejs/test-object-assigned-exports'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/only-object-assigned-exports:
     resolution: {directory: playground/ssr-deps/only-object-assigned-exports, type: directory}
     name: '@vitejs/test-only-object-assigned-exports'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/optimized-with-nested-external:
     resolution: {directory: playground/ssr-deps/optimized-with-nested-external, type: directory}
     name: '@vitejs/test-optimized-with-nested-external'
+    version: 0.0.0
     dependencies:
       nested-external: file:playground/ssr-deps/nested-external
     dev: false
@@ -11017,36 +11077,43 @@ packages:
   file:playground/ssr-deps/pkg-exports:
     resolution: {directory: playground/ssr-deps/pkg-exports, type: directory}
     name: '@vitejs/test-pkg-exports'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/primitive-export:
     resolution: {directory: playground/ssr-deps/primitive-export, type: directory}
     name: '@vitejs/test-primitive-export'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/read-file-content:
     resolution: {directory: playground/ssr-deps/read-file-content, type: directory}
     name: '@vitejs/test-read-file-content'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/require-absolute:
     resolution: {directory: playground/ssr-deps/require-absolute, type: directory}
     name: '@vitejs/test-require-absolute'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-deps/ts-transpiled-exports:
     resolution: {directory: playground/ssr-deps/ts-transpiled-exports, type: directory}
     name: '@vitejs/test-ts-transpiled-exports'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-noexternal/external-cjs:
     resolution: {directory: playground/ssr-noexternal/external-cjs, type: directory}
     name: '@vitejs/test-external-cjs'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-noexternal/require-external-cjs:
     resolution: {directory: playground/ssr-noexternal/require-external-cjs, type: directory}
     name: '@vitejs/test-require-external-cjs'
+    version: 0.0.0
     dependencies:
       '@vitejs/external-cjs': file:playground/ssr-noexternal/external-cjs
       '@vitejs/test-external-cjs': file:playground/ssr-noexternal/external-cjs
@@ -11055,19 +11122,27 @@ packages:
   file:playground/ssr-resolve/deep-import:
     resolution: {directory: playground/ssr-resolve/deep-import, type: directory}
     name: '@vitejs/test-deep-import'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-resolve/entries:
     resolution: {directory: playground/ssr-resolve/entries, type: directory}
     name: '@vitejs/test-entries'
+    version: 0.0.0
     dev: false
 
   file:playground/ssr-resolve/pkg-exports:
     resolution: {directory: playground/ssr-resolve/pkg-exports, type: directory}
     name: '@vitejs/test-resolve-pkg-exports'
+    version: 0.0.0
     dev: false
 
   file:playground/worker/dep-to-optimize:
     resolution: {directory: playground/worker/dep-to-optimize, type: directory}
     name: '@vitejs/test-dep-to-optimize'
+    version: 1.0.0
     dev: false
+
+settings:
+  autoInstallPeers: false
+  excludeLinksFromLockfile: false

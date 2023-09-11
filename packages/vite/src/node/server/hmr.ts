@@ -58,6 +58,8 @@ export async function handleHMRUpdate(
   const shortFile = getShortName(file, config.root)
   const fileName = path.basename(file)
 
+  //
+  // 配置文件和env变量文件以及配置文件依赖文件发生变化直接重启服务器
   const isConfig = file === config.configFile
   const isConfigDependency = config.configFileDependencies.some(
     (name) => file === name,
@@ -89,6 +91,7 @@ export async function handleHMRUpdate(
   debugHmr?.(`[file change] ${colors.dim(shortFile)}`)
 
   // (dev only) the client itself cannot be hot updated.
+  // 客户端注入的文件(vite/dist/client/client.mjs)更改
   if (file.startsWith(withTrailingSlash(normalizedClientDir))) {
     ws.send({
       type: 'full-reload',
@@ -97,6 +100,7 @@ export async function handleHMRUpdate(
     return
   }
 
+  //  普通文件变动
   const mods = moduleGraph.getModulesByFile(file)
 
   // check if any plugin wants to perform custom HMR handling
@@ -109,6 +113,8 @@ export async function handleHMRUpdate(
     server,
   }
 
+  //
+  // 执行每个插件的handleHotUpdate hook,该hook 返回值为新的HRM模块
   for (const hook of config.getSortedPluginHooks('handleHotUpdate')) {
     const filteredModules = await hook(hmrContext)
     if (filteredModules) {
@@ -136,6 +142,7 @@ export async function handleHMRUpdate(
     return
   }
 
+  // TODO 开始查看热更新边界,找到需要更新的模块
   updateModules(shortFile, hmrContext.modules, timestamp, server)
 }
 

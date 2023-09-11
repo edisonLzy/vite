@@ -335,6 +335,7 @@ export function injectQuery(url: string, queryToInject: string): string {
 }
 
 const timestampRE = /\bt=\d{13}&?\b/
+// t=111111111111
 export function removeTimestampQuery(url: string): string {
   return url.replace(timestampRE, '').replace(trailingSeparatorRE, '')
 }
