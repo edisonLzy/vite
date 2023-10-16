@@ -17,6 +17,7 @@ export function loadEnv(
     )
   }
   prefixes = arraify(prefixes)
+  // env对象
   const env: Record<string, string> = {}
   const envFiles = [
     /** default file */ `.env`,
@@ -51,6 +52,7 @@ export function loadEnv(
   expand({ parsed })
 
   // only keys that start with prefix are exposed to client
+  // 1. 将 dotenv上的 VITE_ 变量添加到 env对象
   for (const [key, value] of Object.entries(parsed)) {
     if (prefixes.some((prefix) => key.startsWith(prefix))) {
       env[key] = value
@@ -59,6 +61,7 @@ export function loadEnv(
 
   // check if there are actual env variables starting with VITE_*
   // these are typically provided inline and should be prioritized
+  // 2. 将 process.env 上的 VITE_ 变量添加到 env对象
   for (const key in process.env) {
     if (prefixes.some((prefix) => key.startsWith(prefix))) {
       env[key] = process.env[key] as string

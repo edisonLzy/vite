@@ -127,7 +127,6 @@ async function doTransform(
   const prettyUrl = debugCache ? prettifyUrl(url, config.root) : ''
   const ssr = !!options.ssr
 
-  // hrm: 检查是否有 url对应的 moduleNode
   const module = await server.moduleGraph.getModuleByUrl(url, ssr)
 
   // check if we have a fresh cache
@@ -144,11 +143,22 @@ async function doTransform(
     return cached
   }
 
-  // hrm: 调用各个插件的resolveId方法得到id
-  const id =
-    (await pluginContainer.resolveId(url, undefined, { ssr }))?.id || url
-  // hrm: 调用 load和transform处理模块以及创建moduleNode
-  const result = loadAndTransform(id, url, server, options, timestamp)
+  const resolved = module
+    ? undefined
+    : (await pluginContainer.resolveId(url, undefined, { ssr })) ?? undefined
+
+  // resolve
+  const id = module?.id ?? resolved?.id ?? url
+
+  const result = loadAndTransform(
+    id,
+    url,
+    server,
+    options,
+    timestamp,
+    module,
+    resolved,
+  )
 
   getDepsOptimizer(config, ssr)?.delayDepsOptimizerUntil(id, () => result)
 
@@ -191,9 +201,8 @@ async function loadAndTransform(
     // like /service-worker.js or /api/users
     if (options.ssr || isFileServingAllowed(file, server)) {
       try {
-        // 读取到文本内容
-        code = await fs.readFile(file, 'utf-8')
-        isDebug && debugLoad(`${timeFrom(loadStart)} [fs] ${prettyUrl}`)
+        code = await fsp.readFile(file, 'utf-8')
+        debugLoad?.(`${timeFrom(loadStart)} [fs] ${prettyUrl}`)
       } catch (e) {
         if (e.code !== 'ENOENT') {
           if (e.code === 'EISDIR') {
@@ -250,14 +259,14 @@ async function loadAndTransform(
     throw err
   }
 
-  // ensure module in moduleGraph after successful load
-  // 创建moduleNode
-  const mod = await moduleGraph.ensureEntryFromUrl(url, ssr)
+  if (server._restartPromise && !ssr) throwClosedServerError()
+
+  // ensure module in graph after successful load
+  mod ??= await moduleGraph._ensureEntryFromUrl(url, ssr, undefined, resolved)
   ensureWatchedFile(watcher, mod.file, root)
 
   // transform
-  const transformStart = isDebug ? performance.now() : 0
-  // hrm: 调用插件的transform方法,其中在importAnalysis插件的transform钩子中，将完成模块依赖关系绑定
+  const transformStart = debugTransform ? performance.now() : 0
   const transformResult = await pluginContainer.transform(code, id, {
     inMap: map,
     ssr,

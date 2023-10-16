@@ -1100,6 +1100,7 @@ export function mergeAlias(
   }
   // the order is flipped because the alias is resolved from top-down,
   // where the later should have higher priority
+  // 后面的优先级更高
   return [...normalizeAlias(b), ...normalizeAlias(a)]
 }
 

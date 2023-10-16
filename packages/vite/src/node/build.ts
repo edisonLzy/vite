@@ -1130,7 +1130,7 @@ const relativeUrlMechanisms: Record<
 
 const customRelativeUrlMechanisms = {
   ...relativeUrlMechanisms,
-  'worker-iife': (relativePath) =>
+  'worker-iife': (relativePath: string) =>
     getResolveUrl(`'${relativePath}', self.location.href`),
 } as const satisfies Record<string, (relativePath: string) => string>
 

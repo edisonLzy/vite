@@ -472,6 +472,7 @@ export async function resolveConfig(
 
   // run config hooks
   const userPlugins = [...prePlugins, ...normalPlugins, ...postPlugins]
+  // 合并之后的 config对象: plugin's config hook and inlineConfig
   config = await runConfigHook(config, userPlugins, configEnv)
 
   // If there are custom commonjsOptions, don't force optimized deps for this test
@@ -501,6 +502,7 @@ export async function resolveConfig(
 
   const clientAlias = [
     {
+      // /@vite/env & @vite/env
       find: /^\/?@vite\/env/,
       replacement: path.posix.join(FS_PREFIX, normalizePath(ENV_ENTRY)),
     },
@@ -512,6 +514,7 @@ export async function resolveConfig(
 
   // resolve alias with internal client alias
   const resolvedAlias = normalizeAlias(
+    // config.resolve?.alias 用户传递的别名
     mergeAlias(clientAlias, config.resolve?.alias || []),
   )
 
@@ -939,9 +942,9 @@ export async function loadConfigFromFile(
 } | null> {
   const start = performance.now()
   const getTime = () => `${(performance.now() - start).toFixed(2)}ms`
-
+  // 1. 获取配置文件路径
   let resolvedPath: string | undefined
-
+  // inlineConfig's 显示指定的 configFile
   if (configFile) {
     // explicit config path is always resolved from cwd
     resolvedPath = path.resolve(configFile)
@@ -961,7 +964,7 @@ export async function loadConfigFromFile(
     debug?.('no config file found.')
     return null
   }
-
+  // 2. 获取配置文件类型
   let isESM = false
   if (/\.m[jt]s$/.test(resolvedPath)) {
     isESM = true
@@ -975,7 +978,7 @@ export async function loadConfigFromFile(
         !!pkg && JSON.parse(fs.readFileSync(pkg, 'utf-8')).type === 'module'
     } catch (e) {}
   }
-
+  // 3. 使用 ESBuild 对配置文件进行打包
   try {
     const bundled = await bundleConfigFile(resolvedPath, isESM)
     const userConfig = await loadConfigFromBundledFile(
@@ -984,7 +987,7 @@ export async function loadConfigFromFile(
       isESM,
     )
     debug?.(`bundled config file loaded in ${getTime()}`)
-
+    // 4. configEnv将传递给配置文件中定义的函数
     const config = await (typeof userConfig === 'function'
       ? userConfig(configEnv)
       : userConfig)
@@ -1201,6 +1204,7 @@ async function loadConfigFromBundledFile(
     const defaultLoader = _require.extensions[loaderExt]!
     _require.extensions[loaderExt] = (module: NodeModule, filename: string) => {
       if (filename === realFileName) {
+        // 当加载配置文件的时候, 将 打包之后的产物作为配置文件的内容进行加载
         ;(module as NodeModuleWithCompile)._compile(bundledCode, filename)
       } else {
         defaultLoader(module, filename)
@@ -1220,7 +1224,7 @@ async function runConfigHook(
   configEnv: ConfigEnv,
 ): Promise<InlineConfig> {
   let conf = config
-
+  // 按照 hook 的 order属性 对plugins进行排序
   for (const p of getSortedPluginsByHook('config', plugins)) {
     const hook = p.config
     const handler = hook && 'handler' in hook ? hook.handler : hook

@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename)
 //
 function resolveArgs() {
   const args = minimist(process.argv.slice(2))
+
   const { port = 3333, playground = 'for-hrm' } = args
   return { port, playground }
 }
